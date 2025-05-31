@@ -87,7 +87,6 @@
 // }
 
 // type FuncType = (n: number, m: number) => void;
-
 // interface newObj extends Obj {
 //   name: string;
 //   age: number;
@@ -119,21 +118,18 @@
 
 // ! ---- TypeScript Function ----
 // type FuncType = (n: number, m: number) => number;
-
 // const func: FuncType = (a, b) => {
 //   return a - b;
 // }; // a and b and n and m are same, but we can use any name
 
 // ? Optional Parameters in TypeScript
 // type FuncType = (n: number, m: number, l?: number) => number;
-
 // const func: FuncType = (n, m, l) => {
 //   if (l === undefined) {
 //     return n * m; // If l is not provided, return n * m
 //   }
 //   return n * m * l;
 // };
-
 // console.log(func(10, 20));
 // console.log(func(10, 20, 30));
 
@@ -150,4 +146,47 @@
 // };
 // console.log(func2(23, 35));
 
-// ? Rest Operator
+// ? Function using Rest Operator
+// const func = (...m: number[]) => {
+//   return m;
+// };
+// console.log(func(34, 53, 65, 34, 56));
+
+// TODO: Another way
+// type FuncType = (...m: number[]) => number[];
+// const func: FuncType = (...m) => {
+//   return m;
+// };
+// console.log(func(34, 53, 521, 56, 64));
+
+// ! ---- Function With Objects ----
+interface Product {
+  name: string;
+  stock: number;
+  price: number;
+  photo: string;
+  readonly id: string;
+}
+
+type getDataType = (product: Product) => void; // product is the name object, and Product is the type of that object
+
+const getData: getDataType = (product) => {
+  console.log(product);
+};
+
+const ProductOne: Product = {
+  name: "Dumbbells",
+  stock: 45,
+  price: 1500,
+  photo: "lslkjlrkj4324",
+  id: "12345-abcde", // Readonly property, cannot be changed
+};
+getData(ProductOne);
+
+getData({
+  name: "Barbell",
+  stock: 64,
+  price: 2999,
+  photo: "slkdjfsjk",
+  id: "67890-fghij",
+});
