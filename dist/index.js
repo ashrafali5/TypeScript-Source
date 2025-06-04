@@ -170,26 +170,46 @@
 // type themeMode = "light" | "dark" | "system" | "auto";
 // const setTheme: themeMode = "system";
 // ! ---- TypeScript Classes ----
-// ? Public classes
-class Player {
-    constructor(height, weight) {
-        this.height = height;
-        this.weight = weight;
-    }
-}
-const player1 = new Player(5.1, 74);
-console.log(player1.height);
-// ? Private classes
-class PlayerPrivate {
-    constructor(height, weight, age) {
-        this.myAge = () => {
-            return this.age; // This method can access the private property age
-        };
-        this.height = height;
+// ? Private, Protected, and Public properties in TypeScript
+// class Player {
+//   height;
+//   public weight; // Public is by default
+//   private age;
+//   gender;
+//   constructor(height: number, weight: number, age: number, gender: string) {
+//     this.height = height;
+//     this.weight = weight;
+//     this.age = age;
+//     this.gender = gender;
+//   }
+//   myAge = () => {
+//     return this.age; // This method can access the private property age
+//   };
+// }
+// const Player1 = new Player(5.1, 74, 23, "male");
+// console.log(Player1.age); // Error: age is private and cannot be accessed outside the class
+// console.log(Player1.myAge()); // Accessing private property through a public method
+// TODO: Easy syntax for classes
+class PlayerII {
+    constructor(height, weight, age, gender) {
         this.weight = weight;
         this.age = age;
+        this.gender = gender;
+        this.myAge = () => {
+            return this.age;
+        };
     }
 }
-const PrivatePlayer1 = new PlayerPrivate(5.1, 74, 23);
-// console.log(PrivatePlayer1.age); // Error: age is private and cannot be accessed outside the class
-// console.log(PrivatePlayer1.myAge()); // Accessing private property through a public method
+const Player2 = new PlayerII(234, 245, 43, "male");
+// console.log(Player2.gender); // gender is protected
+//console.log(Player2.myAge()); // Accessing private property
+class childPlayerII extends PlayerII {
+    constructor(height, weight, age, gender, spacial) {
+        super(height, weight, age, gender); // super means parent class properties
+        this.getMyGender = () => {
+            return this.gender;
+        };
+    }
+}
+const childPlayer = new childPlayerII(23, 32, 64, "male", true);
+console.log(childPlayer.getMyGender()); // Accessing protected property through a method in the child class

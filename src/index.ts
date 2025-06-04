@@ -160,33 +160,101 @@
 // console.log(func(34, 53, 521, 56, 64));
 
 // ! ---- Function With Objects ----
-interface Product {
-  name: string;
-  stock: number;
-  price: number;
-  photo: string;
-  readonly id: string;
+// interface Product {
+//   name: string;
+//   stock: number;
+//   price: number;
+//   photo: string;
+//   readonly id: string;
+// }
+
+// type getDataType = (product: Product) => void; // product is the name object, and Product is the type of that object
+
+// const getData: getDataType = (product) => {
+//   console.log(product);
+// };
+
+// const ProductOne: Product = {
+//   name: "Dumbbells",
+//   stock: 45,
+//   price: 1500,
+//   photo: "lslkjlrkj4324",
+//   id: "12345-abcde", // Readonly property, cannot be changed
+// };
+// getData(ProductOne);
+
+// getData({
+//   name: "Barbell",
+//   stock: 64,
+//   price: 2999,
+//   photo: "slkdjfsjk",
+//   id: "67890-fghij",
+// });
+
+// ? Never Type in TypeScript for Function
+// const errorHandler = (): never => {
+//   throw new Error();
+// }; // by hovering over the function, it shows that it returns never type
+
+// const errorHandler1 = () => {
+//   return new Error();
+// }; // by hovering over the function, it shows that it returns Error type
+
+// * for Type Alias
+// type themeMode = "light" | "dark" | "system" | "auto";
+// const setTheme: themeMode = "system";
+
+// ! ---- TypeScript Classes ----
+// ? Private, Protected, and Public properties in TypeScript
+// class Player {
+//   height;
+//   public weight; // Public is by default
+//   private age;
+//   gender;
+
+//   constructor(height: number, weight: number, age: number, gender: string) {
+//     this.height = height;
+//     this.weight = weight;
+//     this.age = age;
+//     this.gender = gender;
+//   }
+//   myAge = () => {
+//     return this.age; // This method can access the private property age
+//   };
+// }
+// const Player1 = new Player(5.1, 74, 23, "male");
+// console.log(Player1.age); // Error: age is private and cannot be accessed outside the class
+// console.log(Player1.myAge()); // Accessing private property through a public method
+
+// TODO: Easy syntax for classes
+class PlayerII {
+  constructor(
+    height: number,
+    public weight: number,
+    private age: number,
+    protected gender: string
+  ) {}
+  myAge = () => {
+    return this.age;
+  };
 }
+const Player2 = new PlayerII(234, 245, 43, "male");
+// console.log(Player2.gender); // gender is protected
+//console.log(Player2.myAge()); // Accessing private property
 
-type getDataType = (product: Product) => void; // product is the name object, and Product is the type of that object
-
-const getData: getDataType = (product) => {
-  console.log(product);
-};
-
-const ProductOne: Product = {
-  name: "Dumbbells",
-  stock: 45,
-  price: 1500,
-  photo: "lslkjlrkj4324",
-  id: "12345-abcde", // Readonly property, cannot be changed
-};
-getData(ProductOne);
-
-getData({
-  name: "Barbell",
-  stock: 64,
-  price: 2999,
-  photo: "slkdjfsjk",
-  id: "67890-fghij",
-});
+class childPlayerII extends PlayerII {
+  constructor(
+    height: number,
+    weight: number,
+    age: number,
+    gender: string,
+    spacial: boolean
+  ) {
+    super(height, weight, age, gender); // super means parent class properties
+  }
+  getMyGender = () => {
+    return this.gender;
+  };
+}
+const childPlayer = new childPlayerII(23, 32, 64, "male", true);
+console.log(childPlayer.getMyGender()); // Accessing protected property through a method in the child class
