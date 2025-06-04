@@ -190,26 +190,43 @@
 // console.log(Player1.age); // Error: age is private and cannot be accessed outside the class
 // console.log(Player1.myAge()); // Accessing private property through a public method
 // TODO: Easy syntax for classes
-class PlayerII {
-    constructor(height, weight, age, gender) {
-        this.weight = weight;
-        this.age = age;
-        this.gender = gender;
-        this.myAge = () => {
-            return this.age;
-        };
-    }
-}
-const Player2 = new PlayerII(234, 245, 43, "male");
+// class PlayerII {
+//   public readonly id: string;
+//   constructor(
+//     height: number,
+//     public weight: number,
+//     private age: number,
+//     protected gender: string
+//   ) {
+//     this.id = String(Math.random() * 100);
+//   }
+//   get MyAge(): number {
+//     return this.age;
+//   }
+//   set ChangeMyAge(newAge: number) {
+//     this.age = newAge;
+//   }
+// }
+// class childPlayerII extends PlayerII {
+//   spacial: boolean;
+//   constructor(
+//     height: number,
+//     weight: number,
+//     age: number,
+//     gender: string,
+//     spacial: boolean
+//   ) {
+//     super(height, weight, age, gender); // super means parent class properties
+//     this.spacial = spacial;
+//   }
+//   getMyGender = () => {
+//     return this.gender;
+//   };
+// }
+// const Player2 = new PlayerII(234, 245, 43, "male");
 // console.log(Player2.gender); // gender is protected
-//console.log(Player2.myAge()); // Accessing private property
-class childPlayerII extends PlayerII {
-    constructor(height, weight, age, gender, spacial) {
-        super(height, weight, age, gender); // super means parent class properties
-        this.getMyGender = () => {
-            return this.gender;
-        };
-    }
-}
-const childPlayer = new childPlayerII(23, 32, 64, "male", true);
-console.log(childPlayer.getMyGender()); // Accessing protected property through a method in the child class
+// console.log(Player2.MyAge); // Accessing private property
+// console.log(Player2.id); // id is public and readonly, can be accessed but not modified
+// console.log((Player2.ChangeMyAge = 23));
+// const childPlayer = new childPlayerII(23, 32, 64, "male", true);
+// console.log(childPlayer.getMyGender()); // Accessing protected property through a method in the child class
