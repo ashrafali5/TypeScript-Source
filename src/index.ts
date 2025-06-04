@@ -270,3 +270,23 @@
 
 // const childPlayer = new childPlayerII(23, 32, 64, "male", true);
 // console.log(childPlayer.getMyGender()); // Accessing protected property through a method in the child class
+
+interface ProductType {
+  name: string;
+  stock: number;
+  price: number;
+  getId: () => string;
+  offer?: boolean;
+}
+
+class Product implements ProductType {
+  private id: string = String(Math.random() * 100);
+  constructor(
+    public name: string,
+    public stock: number,
+    public price: number
+  ) {}
+  getId = () => this.id;
+}
+const product1 = new Product("EarBuds", 58, 1200);
+console.log(product1.getId());
