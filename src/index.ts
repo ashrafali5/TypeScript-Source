@@ -271,22 +271,39 @@
 // const childPlayer = new childPlayerII(23, 32, 64, "male", true);
 // console.log(childPlayer.getMyGender()); // Accessing protected property through a method in the child class
 
-interface ProductType {
-  name: string;
-  stock: number;
-  price: number;
-  getId: () => string;
-  offer?: boolean;
-}
+// interface ProductType {
+//   name: string;
+//   stock: number;
+//   price: number;
+//   offer?: boolean;
+// }
 
-class Product implements ProductType {
-  private id: string = String(Math.random() * 100);
-  constructor(
-    public name: string,
-    public stock: number,
-    public price: number
-  ) {}
-  getId = () => this.id;
-}
-const product1 = new Product("EarBuds", 58, 1200);
-console.log(product1.getId());
+// interface GiveId {
+//   getId: () => string;
+// }
+
+// class Product implements ProductType, GiveId {
+//   private id: string = String(Math.random() * 100);
+//   constructor(
+//     public name: string,
+//     public stock: number,
+//     public price: number
+//   ) {}
+//   getId = () => this.id;
+// }
+// const product1 = new Product("EarBuds", 58, 1200);
+// console.log(product1.getId());
+
+// !---- TypeScript Type Assertion ----
+// const btn1 = document.getElementById("btn") as HTMLElement;
+// const btn2 = <HTMLElement>document.getElementById("btn");
+// const btn3 = document.getElementById("btn")!; // Non-null assertion operator, tells TypeScript that this element will not be null
+
+// btn1.onclick = () => {
+//   document.body.style.backgroundColor = "blue";
+// };
+
+// const img = document.getElementById("img") as HTMLImageElement;
+// const img = document.querySelector("img"); // ok
+
+const form = <HTMLFormElement>document.getElementById("myForm");
