@@ -306,4 +306,114 @@
 // const img = document.getElementById("img") as HTMLImageElement;
 // const img = document.querySelector("img"); // ok
 
-const form = <HTMLFormElement>document.getElementById("myForm");
+// const form = <HTMLFormElement>document.getElementById("myForm");
+// const myInput = <HTMLInputElement>document.querySelector("form>input");
+
+// form.onsubmit = (e: SubmitEvent) => {
+//   e.preventDefault();
+//   const value = Number(myInput.value);
+//   console.log(typeof value);
+
+//   const h2 = document.createElement("h2");
+//   h2.textContent = ` ${value + 20}`;
+//   const body = document.querySelector("body")!;
+//   body.appendChild(h2);
+// };
+
+// TODO Index Signature in TypeScript
+// This allows you to create an object with dynamic keys and values of a specific type
+// interface Person {
+// [key: string]: string;
+//   name: string;
+//   email: string;
+// }
+// const myObj: Person = {
+//   name: "Ashraf Ali",
+//   email: "ashrafmohd@gmail.com",
+// };
+// const getName = (): string => {
+//   return myObj["name"];
+// };
+// const getEmail = (): string => {
+//   return myObj["email"];
+// };
+// const getData = (key: keyof Person): string => {
+//   return myObj[key];
+// };
+// getData("name");
+
+// ! ---- TypeScript Utility Types ----
+// ? Partial<Type>
+// ? Required<Type>
+// ? Readonly<Type>
+// ? Record<Keys, Type>
+// ? Pick<Type, Keys>
+// ? Omit<Type, Keys>
+
+// * Partial<Type>
+// type User = {
+//   name: string;
+//   email: string;
+// };
+// type User2 = Partial<User>; // Makes all properties optional
+
+// * Required<Type> --- // opposite of partial
+// type User = {
+//   name: string;
+//   email?: string;
+//   age?: number;
+// };
+
+// const user: Required<User> = {
+//   name: "Ashraf Ali",
+//   email: "asd@gmail.com",
+//   age: 23,
+// }; // Makes all properties required
+
+// * Readonly<Type>
+// type User = {
+//   name: string;
+//   email: string;
+// };
+// const user: Readonly<User> = {
+//   name: "Ashraf Ali",
+//   email: "ahs@gmail.com",
+// };
+// user.name = "New Name"; // Error: Cannot assign to 'name' because it is a read-only property
+
+// * Record<Keys, Type> --- // Creates an object type with specified keys and their types
+// type User = {
+//   name: string;
+//   email: string;
+// };
+// type User2 = Record<"name" | "email", string>; // Creates an object type with specified keys and their types
+
+// * Example :-
+// interface UserInfo {
+//   age: number;
+// }
+// type UserName = "Ashraf" | "Ali" | "Muhammad";
+// const user: Record<UserName, UserInfo> = {
+//   Ashraf: { age: 23 },
+//   Ali: { age: 25 },
+//   Muhammad: { age: 30 },
+// };
+
+// ? Pick<Type, Keys>
+// interface OrderInfo {
+//   readonly id: string;
+//   product: string;
+//   user: string;
+//   city: string;
+//   state: string;
+//   country: string;
+//   status: string;
+// }
+// type shippingInfo = Pick<OrderInfo, "city" | "state" | "country">; // Creates a new type with only the specified keys from OrderInfo
+
+// ? Omit<Type, Keys>
+interface shippingInfoInfo {
+  city: string;
+  state: string;
+  country: string;
+}
