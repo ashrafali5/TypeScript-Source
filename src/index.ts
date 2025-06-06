@@ -349,6 +349,13 @@
 // ? Record<Keys, Type>
 // ? Pick<Type, Keys>
 // ? Omit<Type, Keys>
+// ? Exclude<Type, ExcludedUnion>
+// ? Extract<Type, Union>
+// ? NonNullable<Type>
+// ? Parameters<Type>
+// ? ConstructorParameters<Type>
+// ? ReturnType<Type>
+// ? InstanceType<Type>
 
 // * Partial<Type>
 // type User = {
@@ -399,7 +406,7 @@
 //   Muhammad: { age: 30 },
 // };
 
-// ? Pick<Type, Keys>
+// * Pick<Type, Keys>
 // interface OrderInfo {
 //   readonly id: string;
 //   product: string;
@@ -411,9 +418,116 @@
 // }
 // type shippingInfo = Pick<OrderInfo, "city" | "state" | "country">; // Creates a new type with only the specified keys from OrderInfo
 
-// ? Omit<Type, Keys>
-interface shippingInfoInfo {
-  city: string;
-  state: string;
-  country: string;
-}
+// * Omit<Type, Keys>
+// interface OrderInfo {
+//   user: string;
+//   product: string;
+//   city: string;
+//   state: string;
+//   country: string;
+// }
+// type ShippingInfo = Omit<OrderInfo, "user" | "product">; // Creates a new type excepting user and product keys from OrderInfo
+
+// * Exclude<Type, ExcludedUnion> // string,number,boolean known as ExcludedUnion
+// type MyUnion = string | number | boolean;
+// type Random = Exclude<MyUnion, boolean>; // Excludes boolean from MyUnion, resulting in string | number
+
+// * Extract<Type, Union>
+// type MyUnion = string | number | boolean;
+// type Random = Extract<MyUnion, boolean | number>; // Extracts boolean and number from MyUnion, resulting in number | boolean
+
+// * NonNullable<Type
+// type MyUnion = string | number | boolean | null | undefined;
+// type Random = NonNullable<MyUnion>; // Excludes null and undefined from MyUnion, resulting in string | number | boolean
+
+// you can also get same result using exclude
+// type Random1 = Exclude<MyUnion, null | undefined>; // Excludes null and undefined from MyUnion, resulting in string | number | boolean
+
+// * Parameters<Type>
+// const myFunc = (a: number, b: string) => {
+//   console.log(a + b);
+// };
+// type FuncParams = Parameters<typeof myFunc>; // Extracts the parameter types of myFunc, resulting in [number, string]
+
+// * ConstructorParameters<Type> // -- this is for classes
+// class SampleClass {
+//   constructor(public a: number, public b: string) {}
+// }
+// type FuncConstructorParams = ConstructorParameters<typeof SampleClass>; // Extracts the constructor parameter types of SampleClass, resulting in [number, string]
+
+// * ReturnType<Type>
+// const myFunc = (a: number, b: string): string => {
+//   return a + b;
+// };
+// type FuncReturnType = ReturnType<typeof myFunc>; // Extracts the return type of myFunc, resulting in string
+
+// * InstanceType<Type>
+// class SampleClass {
+//   constructor(public a: number, public b: string) {}
+// }
+// type ClassInstance = InstanceType<typeof SampleClass>; // Extracts the instance type of SampleClass, resulting in SampleClass
+// const user: ClassInstance = {
+//     a: 23,
+//     b: "Ashraf Ali",
+// }
+
+// ! ---- TypeScript Generics ----
+// Generic function that can accept any type T and return the same type T(you can use any alphabet) and example of types are number, string, boolean, object, array, etc.
+// const func = <T>(a: T): T => {
+//   return a;
+// };
+// const result1 = func<number>(23); // number
+// const result2 = func<string>("Ashraf Ali"); // string
+// const result3 = func<boolean>(true); // boolean
+
+// type person = {
+//   name: string;
+//   age: number;
+// };
+// const func = <T>(a: T): T => {
+//   return a;
+// };
+// const person1: person = {
+//   name: "Ashraf Ali",
+//   age: 23,
+// };
+// const result4 = func<person>(person1); // person type
+
+// TODO: Second Type of Generics
+// const func = <T, U>(n: T, o: U): { n: T; o: U } => {
+//   return { n, o };
+// };
+// const obj = func<number, string>(23, "AshrafAli");
+
+// const func = <T, U>(n: T, o: U): { n: T; o: U } => {
+//   return { n, o };
+// };
+// const obj = func<number, string>(23, "AshrafAli");
+
+// *  Example :-
+
+// type Person = {
+//   name: string;
+//   age: number;
+// };
+// type Person2 = {
+//   name: string;
+//   age: number;
+//   email: string;
+// };
+// const ans: Person = {
+//   name: "Ashraf Ali",
+//   age: 23,
+// };
+// const ans2: Person2 = {
+//   name: "Ashraf Ali",
+//   age: 23,
+//   email: "ahsraf@gmail.com",
+// };
+
+// const func = <T, U extends T>(n: T, o: U): { n: T; o: U } => {
+//   return { n, o };
+// };
+
+// const result5 = func<Person, Person2>(ans, ans2); // both numbers because T extends U
+// console.log(result5);
